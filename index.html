@@ -169,6 +169,7 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
 /* ---------- team ---------- */
 .team-grid { display: grid; gap: 72px; max-width: 1000px; margin: 0; padding: 0; list-style: none; }
 .member { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 56px; align-items: center; }
+.member.wide { grid-template-columns: minmax(0, 540px) minmax(0, 1fr); }
 .member:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 320px); }
 .member:nth-child(even) .portrait { order: 2; }
 .portrait {
@@ -183,6 +184,7 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
   background: url("img/ui/tape.png") center / 100% 100% no-repeat; rotate: -3deg;
 }
 .portrait img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.portrait.landscape img { aspect-ratio: 3 / 2; }
 .member .info { display: grid; gap: 8px; min-width: 0; }
 .member h3 { margin: 0; font: 400 var(--s-xl)/1.15 var(--f-marker); color: var(--cream); text-wrap: balance; }
 .member .role { font-size: var(--s-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); }
@@ -227,9 +229,10 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
 }
 @media (max-width: 720px) {
   .about .wrap, .show { grid-template-columns: minmax(0, 1fr); }
-  .member, .member:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .member, .member.wide, .member:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .member:nth-child(even) .portrait { order: 0; }
   .portrait { width: min(100%, 320px); }
+  .portrait.landscape { width: 100%; }
 }
 @media (max-width: 520px) {
   .grid-shots { grid-template-columns: minmax(0, 1fr); }
@@ -327,8 +330,8 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
         <p class="tape">The team <span lang="ar">الفريق</span></p>
       </div>
       <ul class="team-grid">
-        <li class="member">
-          <figure class="portrait"><img src="img/team-1.jpg" alt="Khalil Abu Hantash, smiling and holding a game controller" width="600" height="750" loading="lazy"></figure>
+        <li class="member wide">
+          <figure class="portrait landscape"><img src="img/team-1.jpg" alt="Khalil Abu Hantash, smiling and holding a game controller next to a TV showing a video game with a Congrats! star" width="1200" height="800" loading="lazy"></figure>
           <div class="info">
             <h3>Khalil Abu Hantash</h3>
             <p class="role">Cofounder &amp; developer</p>
