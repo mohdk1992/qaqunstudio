@@ -8,11 +8,12 @@
 <meta name="description" content="AmmanGTA by Qaqun Game Studio, an open-world, adventure-driven game set in the lively streets of Amman, Jordan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Noto+Kufi+Arabic:wght@400;600;700&family=Permanent+Marker&family=Rubik+Wet+Paint&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Noto+Kufi+Arabic:wght@400;600;700&family=Permanent+Marker&display=swap">
 <style>
-/* Layout: a picture-first page after the game's start menu. The key art and logo, the game's
-   description, then the city in big frames and a gallery. Masking tape labels the parts, a brush
-   stroke carries the action. One deliberate dark look: the page sets every colour itself. */
+/* Layout: a picture-first page after the game's start menu. The key art and logo sticker, the
+   game's description, the city in big frames, a gallery, then the team as taped photos. Masking
+   tape labels the parts, a brush stroke carries the action. One deliberate dark look: the page
+   sets every colour itself. */
 :root {
   --ink: #161412;          /* page ground, the menu's charcoal taken darker */
   --panel: #221f1b;        /* raised surfaces */
@@ -23,7 +24,6 @@
   --yellow: #e5c73b;       /* highlighter stroke / taxi yellow, the accent */
   --outline: #120f0f;      /* logo outline */
 
-  --f-logo: "Rubik Wet Paint", "Permanent Marker", Impact, sans-serif;
   --f-marker: "Permanent Marker", "Segoe Print", "Comic Sans MS", cursive;
   --f-body: "Archivo", "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-ar: "Noto Kufi Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
@@ -31,7 +31,6 @@
   --s-xs: 0.8125rem; --s-sm: 0.9375rem; --s-md: 1.0625rem; --s-lg: 1.25rem;
   --s-xl: clamp(1.5rem, 1.1rem + 1.6vw, 2.3rem);
   --s-2xl: clamp(2rem, 1.3rem + 3vw, 3.3rem);
-  --s-logo: clamp(3.6rem, 1.2rem + 10vw, 9.5rem);
 
   --gutter-l: max(16px, env(safe-area-inset-left, 0px));
   --gutter-r: max(16px, env(safe-area-inset-right, 0px));
@@ -109,10 +108,8 @@ h2 { font: 400 var(--s-2xl)/1.08 var(--f-marker); color: var(--cream); }
   border-bottom: 1px solid var(--line);
 }
 .site-head .wrap { display: flex; align-items: center; gap: 20px; min-height: 60px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--cream); flex: none; }
-.brand img { width: 30px; }
-.brand span { font: 400 1.35rem/1 var(--f-logo); letter-spacing: 0.02em; text-transform: uppercase; }
-.brand b { font-weight: 400; color: var(--red); }
+.brand { display: flex; align-items: center; flex: none; }
+.brand img { height: 46px; width: auto; }
 .site-nav { min-width: 0; overflow-x: auto; scrollbar-width: none; margin-left: auto; }
 .site-nav::-webkit-scrollbar { display: none; }
 .site-nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; white-space: nowrap; }
@@ -142,17 +139,7 @@ h2 { font: 400 var(--s-2xl)/1.08 var(--f-marker); color: var(--cream); }
   padding-left: var(--gutter-l); padding-right: var(--gutter-r);
   text-align: center;
 }
-.logo .crown { width: clamp(56px, 7vw, 96px); margin-bottom: -0.5vw; }
-.logo h1 {
-  display: grid; justify-items: center;
-  font: 400 var(--s-logo)/0.86 var(--f-logo);
-  letter-spacing: 0.02em; text-transform: uppercase;
-  color: var(--cream);
-  -webkit-text-stroke: 0.07em var(--outline);
-  paint-order: stroke fill;
-  filter: drop-shadow(0 6px 0 rgba(18, 15, 15, .55));
-}
-.logo h1 .gta { color: var(--red); font-size: 1.04em; }
+.logo h1 img { width: clamp(260px, 54vw, 660px); filter: drop-shadow(0 12px 20px rgba(0, 0, 0, .45)); }
 
 /* ---------- about ---------- */
 .about { padding-block: 8px clamp(56px, 8vw, 100px); }
@@ -179,7 +166,30 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
 .zoom img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .35s ease; }
 .zoom:hover img { transform: scale(1.03); }
 
+/* ---------- team ---------- */
+.team-grid { display: grid; gap: 72px; max-width: 1000px; margin: 0; padding: 0; list-style: none; }
+.member { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 56px; align-items: center; }
+.member:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 320px); }
+.member:nth-child(even) .portrait { order: 2; }
+.portrait {
+  position: relative; margin: 14px 0 0;
+  padding: 10px 10px 12px; background: var(--cream);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, .45);
+  transform: rotate(-1.4deg);
+}
+.member:nth-child(2) .portrait { transform: rotate(1.2deg); }
+.portrait::before { /* a strip of tape holding the photo */
+  content: ""; position: absolute; top: -14px; left: 50%; width: 118px; height: 28px; translate: -50% 0;
+  background: url("img/ui/tape.png") center / 100% 100% no-repeat; rotate: -3deg;
+}
+.portrait img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.member .info { display: grid; gap: 8px; min-width: 0; }
+.member h3 { margin: 0; font: 400 var(--s-xl)/1.15 var(--f-marker); color: var(--cream); text-wrap: balance; }
+.member .role { font-size: var(--s-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); }
+.member .bio { color: var(--stone); }
+
 /* ---------- studio ---------- */
+.studio { border-top: 1px solid var(--line); }
 .studio .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 72px; }
 .wordmark { display: grid; gap: 6px; justify-items: start; }
 .wordmark [lang="ar"] { font: 700 clamp(3.6rem, 2rem + 6vw, 6.5rem)/1.1 var(--f-ar); color: var(--cream); }
@@ -217,11 +227,14 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
 }
 @media (max-width: 720px) {
   .about .wrap, .show { grid-template-columns: minmax(0, 1fr); }
+  .member, .member:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .member:nth-child(even) .portrait { order: 0; }
+  .portrait { width: min(100%, 320px); }
 }
 @media (max-width: 520px) {
   .grid-shots { grid-template-columns: minmax(0, 1fr); }
   .hero { background-position: 30% 42%; }
-  .brand span { font-size: 1.15rem; }
+  .brand img { height: 40px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -232,15 +245,15 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
 <body>
 <header class="site-head">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Amman GTA, back to top">
-      <img src="img/ui/crown.png" alt="" width="128" height="100">
-      <span>Amman <b>GTA</b></span>
+    <a class="brand" href="#top" aria-label="AmmanGTA, back to top">
+      <img src="img/logo-small.png" alt="" width="240" height="163">
     </a>
     <nav class="site-nav" aria-label="Sections">
       <ul>
         <li><a href="#about">The game</a></li>
         <li><a href="#city">The city</a></li>
         <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#team">Team</a></li>
         <li><a href="#studio">Studio</a></li>
       </ul>
     </nav>
@@ -250,8 +263,7 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
 <main id="top">
   <section class="hero" aria-label="AmmanGTA">
     <div class="logo">
-      <img class="crown" src="img/ui/crown.png" alt="" width="128" height="100">
-      <h1><span>Amman</span> <span class="gta">GTA</span></h1>
+      <h1><img src="img/logo.png" alt="AmmanGTA" width="1100" height="748"></h1>
     </div>
   </section>
 
@@ -305,6 +317,32 @@ figcaption { margin-top: 8px; font-size: var(--s-xs); color: var(--stone); lette
         <li><figure><button class="zoom" type="button"><img src="img/g-06.jpg" alt="A red SUV driving beside a white sedan on a long boulevard lined with limestone buildings" width="1280" height="720" loading="lazy"></button><figcaption>On the boulevard</figcaption></figure></li>
         <li><figure><button class="zoom" type="button"><img src="img/g-07.jpg" alt="The storefront of Al Raya Bakery with its Arabic and English sign, a red car parked in front and apartment blocks beyond" width="1280" height="720" loading="lazy"></button><figcaption>Al Raya Bakery</figcaption></figure></li>
         <li><figure><button class="zoom" type="button"><img src="img/g-08.jpg" alt="A residential street at night under a starry sky, apartment blocks on both sides and the main character standing in the road" width="1090" height="720" loading="lazy"></button><figcaption>A street at night</figcaption></figure></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <div class="wrap">
+      <div class="head">
+        <p class="tape">The team <span lang="ar">الفريق</span></p>
+      </div>
+      <ul class="team-grid">
+        <li class="member">
+          <figure class="portrait"><img src="img/team-1.jpg" alt="Khalil Abu Hantash, smiling and holding a game controller" width="600" height="750" loading="lazy"></figure>
+          <div class="info">
+            <h3>Khalil Abu Hantash</h3>
+            <p class="role">Cofounder &amp; developer</p>
+            <p class="bio">Khalil Abu Hantash is a biomedical engineer, researcher, and software developer with a passion for gaming, artificial intelligence, and interactive technologies. With an international background in engineering and research, he combines technical expertise with creative storytelling. At Qaqun Game Studio, he works on bringing the streets, culture, and everyday experiences of Amman to life through AmmanGTA, an ambitious open-world adventure inspired by Jordan.</p>
+          </div>
+        </li>
+        <li class="member">
+          <figure class="portrait"><img src="img/team-2.jpg" alt="Roa Abu Hantash, smiling, seated outdoors under trees" width="640" height="800" loading="lazy"></figure>
+          <div class="info">
+            <h3>Roa Abu Hantash</h3>
+            <p class="role">Cofounder &amp; graphic designer</p>
+            <p class="bio">A creative artist with skills in animation, game development, and graphic design. Wishing to put a smile on the faces of those who experience her work.</p>
+          </div>
+        </li>
       </ul>
     </div>
   </section>
